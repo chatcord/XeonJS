@@ -50,7 +50,7 @@ Xeon JS is very simple and totaly based on browser javascript.
   "author": "",
   "license": "ISI",
   "dependencies": {
-    "xeon": "xeon"
+    "xeonjs": "^1.0.4"
   }
 }
 ```
