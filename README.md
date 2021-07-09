@@ -17,4 +17,16 @@ Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
 * You can also use [online playground](https://codepen.io/) to test Xeon JS.
 
 ## Documentation
-This will be added letter.
+Xeon JS is very simple and totaly based on browser javascript.
+
+### Folder Structure.
+* node_modules/ ( npm packages )
+* public/ ()
+  * index.html ( only html file )
+  * assets/ ( This folder can directly be called from anywhere using "/assets/<file_name>" )
+* src/ ()
+  * utils/ ( This folder can directly be called from anywhere using "/utils/<file_name>" )
+  * main.js ( mandatory file )
+* index.js ( mandatory file. Custom Backend Code. Executes before the server starts )
+* package-lock.json ( node_modules/ folder tree stayed here. Used for version control for npm packages. [Learn More.](https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json) )
+* package.json ( App Details Exists Here. [Learn More.](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) )
