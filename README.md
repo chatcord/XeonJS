@@ -20,13 +20,104 @@ Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
 Xeon JS is very simple and totaly based on browser javascript.
 
 ### Folder Structure.
-* node_modules/ ( npm packages )
-* public/ ()
-  * index.html ( only html file )
-  * assets/ ( This folder can directly be called from anywhere using "/assets/<file_name>" )
-* src/ ()
-  * utils/ ( This folder can directly be called from anywhere using "/utils/<file_name>" )
-  * main.js ( mandatory file )
-* index.js ( mandatory file. Custom Backend Code. Executes before the server starts )
-* package-lock.json ( node_modules/ folder tree stayed here. Used for version control for npm packages. [Learn More.](https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json) )
-* package.json ( App Details Exists Here. [Learn More.](https://docs.npmjs.com/cli/v7/configuring-npm/package-json) )
+```
+ App
+ ├───node_modules/ ( npm packages )
+ ├───public/
+ │   ├───assets/ ( This folder can directly be called from anywhere using "/assets/<file_name>" )
+ │   └───index.html ( only html file )
+ ├───src/
+ │   ├───utils/ ( This folder can directly be called from anywhere using "/utils/<file_name>" )
+ │   └───main.js ( mandatory file )
+ ├───package-lock.json ( node_modules/ folder tree stayed here. Used for version control for npm packages. Learn More: https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json )
+ └───package.json ( App Details Exists Here. Learn More: https://docs.npmjs.com/cli/v7/configuring-npm/package-json )
+ ```
+## Hello World Example.
+1. create a new project
+2. Initialize the project. ( Execute the code ```npm init``` in the command line in the directory )
+3. Install Xeon JS in the project ( Execute the code ```npm i xeonjs``` in the command line in the directory )
+4. Create "start" script in the /package.json file ( ```/package.json``` file should look like this )
+```json
+{
+  "name": "<App_name>",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "xeon-script start", [This_line_Should_be_added]
+    "prod": "xeon-script start -prod" [This_line_may_be_added]
+  },
+  "author": "",
+  "license": "ISI",
+  "dependencies": {
+    "xeon": "xeon"
+  }
+}
+```
+5. Now create the following 3 files and add the codes.
+
+* /public/index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Xeon Js</title>
+      <!-- Add all your links here -->
+</head>
+<body>
+      <!-- Div with id 'root', here all your code will appear -->
+      <div id="root"></div>
+      <!-- An module script will be added here from backend -->
+</body>
+</html>
+```
+* /src/main.js
+```js
+// This file is mandatory.
+// Actual Xeon js will find this file and execute.
+// This is an module script directly executes in the browser.
+
+// import view components.
+import App from "./view/app.js";
+
+// export constant named "routes" . add all routes with view components here.
+export const routes = [
+      { path: "/", view: App }
+];
+// export the id of the div you chosen in the "/public/index.html" file.
+export const root = document.getElementById("root");
+```
+* /src/view/app.js
+```js
+import Xeon from "/xeon";
+
+export default class extends Xeon {
+      constructor(params){
+            super(params);
+            this.setTitle("Xeon Js Template");
+      }
+
+      async getHtml(){
+            return(`
+                  <h1>Hello World</h1>
+            `);
+      }
+}
+```
+6. Now enter the command ```npm start``` in the command line in the project directory.
+7. Then in the browser you can browse http://localhost:5000/ to see the app.
+
+
+
+
+
+
+
+
+
+
+
+
