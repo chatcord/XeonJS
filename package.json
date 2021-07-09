@@ -1,0 +1,25 @@
+{
+  "name": "xeon",
+  "version": "1.0.0",
+  "description": "A Single Page Web Framework With Both Frontend And Backend",
+  "main": "./bin/index.js",
+  "scripts": {},
+  "bin": {
+    "xeon-script": "./bin/index.js"
+  },
+  "keywords": [
+    "XEON JS",
+    "xeon.js",
+    "Single Page Website",
+    "Node FrameWork",
+    "SPA Framework"
+  ],
+  "author": "Arif Sardar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "nodemon": "^2.0.7",
+    "open": "^8.2.1"
+  }
+}
