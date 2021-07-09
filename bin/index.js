@@ -16,8 +16,10 @@ var mode;
 if (args[0] === "start") {
       if(args[1] === "--production" || args[1] === "-prod"){
             mode = "production";
+            process.env.NODE_ENV = "production";
       } else if(args[1] === "--development" || args[1] === "-dev" || args[1] === undefined){
             mode = "development";
+            process.env.NODE_ENV = "development";
       }
 }
 
