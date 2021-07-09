@@ -9,6 +9,13 @@
 'use strict';
 
 const clearConsole = require("../utils/clearConsole");
+const fs = require("fs");
+const path = require("path");
+// resolveApp func. to get actual path relative to Main app
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
+require(resolveApp("./index.js"));
 
 const args = process.argv.slice(2);
 var mode;
@@ -21,11 +28,17 @@ if (args[0] === "start") {
             mode = "development";
             process.env.NODE_ENV = "development";
       }
+      clearConsole();
+      console.log("\x1b[34m",`
+Xeon Js ${mode} Environment is setting up ...
+      `, "\x1b[0m" );
+      
+      require("../files/server", mode);
+} else if(args[0] === "--help" || args[0] === "-h"){
+      clearConsole();
+      fs.readFile( path.resolve(__dirname, "../files/help.txt") , 'utf-8', function(err, data){
+            if (err) throw err;
+            console.log(data);
+      });
 }
 
-clearConsole();
-console.log("\x1b[34m",`
-Xeon Js ${mode} Environment is setting up ...
-`, "\x1b[0m" );
-
-require("../files/server", mode);
