@@ -11,6 +11,7 @@
 const clearConsole = require("../utils/clearConsole");
 const fs = require("fs");
 const path = require("path");
+const chalk = require('chalk');
 // resolveApp func. to get actual path relative to Main app
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -29,9 +30,9 @@ if (args[0] === "start") {
             process.env.NODE_ENV = "development";
       }
       clearConsole();
-      console.log("\x1b[34m",`
+      console.log(chalk.blue.bold(`
 Xeon Js ${mode} Environment is setting up ...
-      `, "\x1b[0m" );
+`));
       
       require("../files/server", mode);
 } else if(args[0] === "--help" || args[0] === "-h"){

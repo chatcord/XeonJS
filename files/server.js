@@ -4,6 +4,7 @@ const http = require('http').createServer(app);
 const path = require('path');
 const fs = require('fs');
 const open = require("open");
+const chalk = require('chalk');
 const config = require("../utils/config");
 
 // resolveApp func. to get actual path relative to Main app
@@ -37,8 +38,8 @@ app.all('*', (req, res, next) => {
 // start the server.
 http.listen( config.Port , err => {
       if (err) throw err;
-console.log("\x1b[32m",`${ require(config.appPackage).name } App is started on port ${ config.Port }
-`, "\x1b[0m" );
+console.log(chalk.green.bold(`${ require(config.appPackage).name } App is started on port ${ config.Port }
+`));
 
 const keys = Object.keys(config.network.Interface);
 for(let i=0;i<config.network.length;i++){
@@ -49,16 +50,16 @@ for(let i=0;i<config.network.length;i++){
             // console.log(obj);
             if(obj.family === "IPv4"){
                   if(obj.address === "127.0.0.1"){
-                        console.log("\x1b[32m",`    Local Mechine: ${config.Protocol}://${ obj.address }:${config.Port}/`, "\x1b[0m" );
+                        console.log(chalk.cyanBright.bold(`    Local Mechine: ${config.Protocol}://${ obj.address }:${config.Port}/`));
                   } else {
-                        console.log(`     Local Network: ${config.Protocol}://${ obj.address }:${config.Port}/`);
+                        console.log(chalk.white(`     Local Network: ${config.Protocol}://${ obj.address }:${config.Port}/`));
                   }
             }
       }
 }
 console.log();
-console.log("\x1b[31m",`Press Ctrl + C to terminate the session
-`, "\x1b[0m" );
+console.log(chalk.redBright.bold("Press Ctrl + C to terminate the session"));
+console.log();
 
       if(args[1] === "--development" || args[1] === "-dev" || args[1] === undefined){
             open(`${config.Protocol}://${config.Host}:${config.Port}/`); // open default browser if development mode.
