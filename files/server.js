@@ -19,7 +19,7 @@ app.use('/src'   , express.static(resolveApp('src')));
 app.use('/utils' , express.static(resolveApp('src/utils')));
 // Add xeon js and xeonjs js and send response.
 app.get('/xeonjs', (req, res, next) => {
-      res.status(200).sendFile(path.resolve(__dirname, "./xeonjs-obfuscated.js"));
+      res.status(200).sendFile(path.resolve(__dirname, "./xeonjs.js"));
 });
 app.get('/xeon', (req, res, next) => {
       res.status(200).sendFile(path.resolve(__dirname, "./xeon.js"));
