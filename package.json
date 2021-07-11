@@ -1,6 +1,6 @@
 {
   "name": "xeonjs",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Single Page Web Framework With Both Frontend And Backend",
   "main": "./bin/index.js",
   "scripts": {},
