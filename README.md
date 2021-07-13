@@ -13,7 +13,7 @@ Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
 ```html
 <script type="module" src="https://unpkg.com/browse/xeonjs@1.0.3/files/xeonjs-obfuscated.js" ></script>
 ```
-* **NPM :** The folder structure of a xeon app in npm is very simple. There is only two folders and a file is all that we need. Unfortunetly curently we don't have any npm script for start up template. But you can find a startup template [Here](https://github.com/chatcord/XeonJS/template).
+* **NPM :** The folder structure of a xeon app in npm is very simple. There is only two folders and a file is all that we need. ~~Unfortunetly curently we don't have any npm script for start up template.~~ But you can find a startup template [Here](https://github.com/chatcord/XeonJS/template).
 * You can also use [online playground](https://codepen.io/) to test Xeon JS.
 
 ## Documentation
