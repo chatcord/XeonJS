@@ -47,7 +47,9 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.1",
+    "chokidar": "^3.5.2",
     "express": "^4.17.1",
+    "faye-websocket": "^0.11.4",
     "http": "0.0.1-security",
     "nodemon": "^2.0.7",
     "open": "^8.2.1"
