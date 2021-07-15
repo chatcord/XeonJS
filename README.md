@@ -5,6 +5,8 @@
 * **No Reload :** Nevegate through the app without reloading the page using *__"data-link"__* attribute to any anchore tag or use *__"nevigateTo(url)"__* function in javascript.
 * **Change title or icon :** Change app title or shortcut icon for each routed page using function *__"this.setTitle(title);" & "this.setIcon(url);"__*.
 * **Component Based :** You can create view components and use them any where in the app by importing it. This helps to create complex user interface. The component actuly made with html are usely written in javascript function, and used return statement.
+* **Auto Refresh :** Automatically refresh the page on change of any file. Only in development mode.
+* **Error Overlay :** Show the error in the code on to the dom. Only in development mode.
 
 ## Installation
 Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
@@ -56,7 +58,7 @@ You can download the example project from https://github.com/chatcord/Xeon-JS-He
   "author": "",
   "license": "ISI",
   "dependencies": {
-    "xeonjs": "^1.0.4"
+    "xeonjs": "^1.1.0"
   }
 }
 ```
@@ -104,6 +106,7 @@ export default class extends Xeon {
       constructor(params){
             super(params);
             this.setTitle("Xeon Js Template");
+            this.setIcon(<url_to_the_icon>);
       }
 
       async getHtml(){
