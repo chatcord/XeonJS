@@ -14,7 +14,6 @@ const chalk = require('chalk');
 const chokidar = require('chokidar');
 const WebSocket = require('faye-websocket');
 const config = require("../utils/config");
-const nodemon = require('nodemon');
 
 // resolveApp func. to get actual path relative to Main app
 const appDirectory = fs.realpathSync(process.cwd());
@@ -28,7 +27,7 @@ app.use('/src', express.static(resolveApp('src')));
 app.use('/utils', express.static(resolveApp('src/utils')));
 // Add xeon js and xeonjs js and send response.
 app.get('/xeonjs', (req, res, next) => {
-      res.status(200).sendFile(path.resolve(__dirname, "./xeonjs.js"));
+      res.status(200).sendFile(path.resolve(__dirname, "./xeonjs-obfuscated.js"));
 });
 app.get('/xeon', (req, res, next) => {
       res.status(200).sendFile(path.resolve(__dirname, "./xeon.js"));
@@ -132,7 +131,8 @@ if(process.env.NODE_ENV==="development"){
       var ignored = [
             function (testPath) { // Always ignore dotfiles (important e.g. because editor hidden temp files)
                   return testPath !== "." && /(^[.#]|(?:__|~)$)/.test(path.basename(testPath));
-            }
+            },
+            resolveApp("node_modules"),
       ];
       chokidar.watch(appDirectory, {
             ignored: ignored,
