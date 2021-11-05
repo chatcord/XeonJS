@@ -34,13 +34,13 @@ if(package_json["xeon-config"]) {
 const args = process.argv.slice(2); // Get Arguments
 
 // Add all static folders.
-app.use('/assets', express.static(resolveApp('./assets')));
+app.use('/assets', express.static(resolveApp(process.env.ASSETS_DIR || './assets')));
 const protectedRoute = new RegExp(`/${process.env.SOURCE_DIR || "src"}/${process.env.PROTECTED_ROUTE || "protected"}($|/)`);
-app.use([protectedRoute, '/src'], express.static(resolveApp("./src")));
+app.use([protectedRoute, '/src'], express.static(resolveApp(process.env.SOURCE_DIR || "./src")));
 
 // Add xeon js and send response.
 app.get('/index.js', (req, res, next) => {
-      res.status(200).sendFile(resolveApp("./index.js"));
+      res.status(200).sendFile(resolveApp(process.env.XEON_ENTRY_FILE || "./index.js"));
 });
 app.get('/xeon', (req, res, next) => {
       res.status(200).sendFile(path.resolve(__dirname, "./xeon.js"));
@@ -56,7 +56,7 @@ app.get('/erroroverlay', (req, res, next) => {
 // send index.html file for all end point.
 app.all('*', (req, res, next) => {
       var html;
-      fs.readFile(resolveApp('./index.html'), 'utf-8', function (err, data) {
+      fs.readFile(resolveApp(process.env.HTML_FILE || './index.html'), 'utf-8', function (err, data) {
             if (err) throw err;
             html = data;
             if (process.env.NODE_ENV === "development") {
@@ -135,6 +135,7 @@ if (process.env.NODE_ENV === "development") {
             });
       }
       var ignored = [
+            ...process.env.IGNORED_FILES || [],
             function (testPath) { // Always ignore dotfiles (important e.g. because editor hidden temp files)
                   return testPath !== "." && /(^[.#]|(?:__|~)$)/.test(path.basename(testPath));
             },
