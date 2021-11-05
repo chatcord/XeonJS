@@ -13,7 +13,7 @@ Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
 
 * **CDN :** xeon js can be impliment from cdn. But there we need to notice that for every endpoint the index.html file have to be served.
 ```html
-<script type="module" src="https://unpkg.com/xeonjs@latest/files/xeonjs-obfuscated.js" ></script>
+<script type="module" src="https://unpkg.com/xeonjs@latest/files/xeon.js" ></script>
 ```
 * **NPM :** The folder structure of a xeon app in npm is very simple. There is only two folders and a file is all that we need. ~~Unfortunetly curently we don't have any npm script for start up template.~~ But you can find a startup template [Here](https://github.com/chatcord/XeonJS/template).
 * **Xeon-cli :** Xeon-cli is a very powerful tool to create xeon app with a single line of code. You can find verious templates for your app.
@@ -21,7 +21,7 @@ Xeon Js is perfectly designed to be used from anywhere either npm or cdn.
 npx xeon-cli create-app <app_name> --template=<template_name> --git --updateNpm
 ```
 #### Read More at : [Xeon-cli](https://github.com/chatcord/xeon-cli#readme).
-* You can also use [online playground](https://codepen.io/) to test Xeon JS.
+* You can also use [online playground](https://codepen.io/pen/?template=ExvQLev) to test Xeon JS.
 
 ## Documentation
 Xeon JS is very simple and totaly based on browser javascript.
@@ -30,12 +30,10 @@ Xeon JS is very simple and totaly based on browser javascript.
 ```
  App
  ├───node_modules/ ( npm packages )
- ├───public/
- │   ├───assets/ ( This folder can directly be called from anywhere using "/assets/<file_name>" )
- │   └───index.html ( only html file )
- ├───src/
- │   ├───utils/ ( This folder can directly be called from anywhere using "/utils/<file_name>" )
- │   └───main.js ( mandatory file )
+ ├───assets/ (This folder can directly be called from anywhere using "/assets/<file_name>")
+ ├───src/ ( Store your views here )
+ ├───index.html ( only html file )
+ ├───index.js ( Main Xeon Entry Point )
  ├───package-lock.json ( node_modules/ folder tree stayed here. Used for version control for npm packages. Learn More: https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json )
  └───package.json ( App Details Exists Here. Learn More: https://docs.npmjs.com/cli/v7/configuring-npm/package-json )
  ```
@@ -82,39 +80,25 @@ You can download the example project from https://github.com/chatcord/Xeon-JS-He
 </body>
 </html>
 ```
-* /src/main.js
+* /index.js
 ```js
 // This file is mandatory.
 // Actual Xeon js will find this file and execute.
 // This is an module script directly executes in the browser.
 
-// import view components.
-import App from "./view/app.js";
+// import xeon js.
+import xeon from '/xeon';
 
-// export constant named "routes" . add all routes with view components here.
-export const routes = [
-      { path: "/", view: App }
-];
-// export the id of the div you chosen in the "/public/index.html" file.
-export const root = document.getElementById("root");
-```
-* /src/view/app.js
-```js
-import Xeon from "/xeon";
+/**
+ * configure your app.
+ * 
+ * @syntax xeon.config(<xeon-element>, <target-element>);
+ */
+xeon.config(
+      xeon.createElement("h1", {}, "Hello World"),
+      document.getElementById("root")
+);
 
-export default class extends Xeon {
-      constructor(params){
-            super(params);
-            this.setTitle("Xeon Js Template");
-            this.setIcon(<url_to_the_icon>);
-      }
-
-      async getHtml(){
-            return(`
-                  <h1>Hello World</h1>
-            `);
-      }
-}
 ```
 6. Now enter the command ```npm start``` in the command line in the project directory.
 7. Then in the browser you can browse http://localhost:5000/ to see the app.
