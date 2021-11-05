@@ -1,7 +1,0 @@
-/**
- * Copyright (c) 2021-present, ChatCord, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-import{routes,root}from"/src/main.js";const pathToRegex=t=>new RegExp("^"+t.replace(/\//g,"\\/").replace(/:\w+/g,"(.+)")+"$"),getParams=t=>{const e=t.result.slice(1),o=Array.from(t.route.path.matchAll(/:(\w+)/g)).map(t=>t[1]);return Object.fromEntries(o.map((t,o)=>[t,e[o]]))},navigateTo=t=>{window.location.pathname!==t&&window.location.href!==t&&window.location.origin!==t&&(history.pushState(null,null,t),router())},router=async()=>{let t=routes.map(t=>({route:t,result:location.pathname.match(pathToRegex(t.path))})).find(t=>null!==t.result);if(!t)return void navigateTo("/");const e=new t.route.view(getParams(t));var o=await e.getHtml(),r=e.onLoad;if("function"==typeof r){var a=new(window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver)(t=>{r(),a.disconnect()});a.observe(root,{childList:!0,subtree:!0,characterData:!0})}root.innerHTML=o};window.addEventListener("popstate",router),document.addEventListener("DOMContentLoaded",()=>{document.body.addEventListener("click",t=>{t.target.matches("[data-link]")&&(t.preventDefault(),navigateTo(t.target.getAttribute("href")))}),router()});

@@ -12,11 +12,6 @@ const clearConsole = require("../utils/clearConsole");
 const fs = require("fs");
 const path = require("path");
 const chalk = require('chalk');
-// resolveApp func. to get actual path relative to Main app
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
-require(resolveApp("./index.js"));
 
 const args = process.argv.slice(2);
 var mode;
